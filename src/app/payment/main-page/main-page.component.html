@@ -1,0 +1,143 @@
+<section class="bg-[#CACACA] py-6 antialiased md:py-12">
+  <!-- Encabezado -->
+  <header class="mb-8">
+    <h1 class="encabezado text-xl md:text-3xl font-bold text-center">Finalizar compra</h1>
+  </header>
+
+  <!-- Contenedor principal con mayor ancho -->
+  <div class="container max-w-screen-xl mx-auto px-3 2xl:px-12 bg-white">
+    <!-- Fecha y Hora -->
+    <div class="text-sm md:text-base font-semibold text-gray-600 text-right mb-4" id="datetime">
+      <!-- Dinámicamente se actualizará con JS -->
+    </div>
+
+    <!-- Contenedor del formulario de pago -->
+    <div class="checkout-container space-y-4">
+      <!-- Formulario de pago -->
+      <div class="shipping-payment space-y-4">
+        <!-- Campo Dirección de envío -->
+        <div class="shipping-address">
+          <div class="form-group">
+            <label for="address" class="block text-sm font-medium text-gray-700">Dirección*</label>
+            <input type="text" placeholder="Dirección*" name="address" id="address" [(ngModel)]="form.address"
+              (focus)="clearError('address')" (blur)="validateAddress()" required>
+            <span id="address-error" class="error-message" style="display:none;"></span>
+          </div>
+
+          <!-- Mapa interactivo -->
+          <div id="map-container" style="margin-top: 16px; height: 400px; width: 100%;">
+            <iframe id="map" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen=""
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.27990773426!2d-74.25987568739751!3d40.69767006457098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259af18fb1dbd%3A0x80d35c9b3b60cf88!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sec!4v1674088843456!5m2!1sen!2sec">
+            </iframe>
+          </div>
+        </div>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3989.775132499125!2d-78.55621592286057!3d-0.2665889990366425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwMT
+          UnNTkuNyJTIDc4wrAzMycwNC44Ilc!5e0!3m2!1ses-419!2sec!4v1737700130739!5m2!1ses-419!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
+         referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        <!-- Campo Código Postal -->
+        <div class="shipping-postal mt-4">
+          <div class="form-group">
+            <!-- Etiqueta (Código Postal) permanece arriba -->
+            <label for="postal-code" class="block text-sm font-bold text-gray-700 mb-1">Código Postal*</label>
+
+            <!-- Contenedor para el input y el enlace -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-2">
+              <!-- Campo de Entrada -->
+              <input type="text" id="postalCode" placeholder="Código Postal" name="postalCode" id="postalCode"
+                [(ngModel)]="form.postalCode" (focus)="clearError('postalCode')" (blur)="validatePostalCode()" required
+                style="max-width: 300px;"
+                class="w-1/4 rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+              <span id="postalCode-error" class="error-message" style="display:none;"></span>
+
+              <!-- Hipervínculo pegado al campo -->
+              <a href="https://www.codigopostal.gob.ec/" target="_blank"
+                class="text-sm text-blue-600 underline hover:text-blue-800 mt-2 sm:mt-0">
+                Busca tu código postal aquí
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campo Método de Pago -->
+        <div class="payment-method mt-8">
+          <label for="payment" class="block text-sm font-medium text-gray-700">Método de Pago</label>
+          <div id="payment" class="paypal flex items-center space-x-3 mt-2">
+            <img src="http://localhost:4200/assets/images/paypal.png" alt="PayPal" class="w-8 h-8" />
+            <span class="text-sm font-medium text-gray-800">PayPal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-col lg:flex-row lg:items-start lg:gap-4 xl:gap-6">
+      <!-- Product List -->
+      <div class="w-full lg:max-w-4xl xl:max-w-6xl mx-auto px-3">
+        <div class="space-y-4">
+          <ng-container *ngFor="let cartItem of state.products()">
+            <app-review-items class="block transition-transform transform bg-white rounded-lg p-4"
+              [productCartItem]="cartItem"></app-review-items>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="w-full lg:max-w-4xl space-y-3 mx-auto px-3">
+        <div class="space-y-4 rounded-lg border-2 border-gray-500 p-4 sm:p-6">
+          <p class="text-xl text-center font-bold">Resumen de la Compra</p>
+          <p class="text-xl text-left font-bold">
+            Productos: <span class="text-gray-700">({{ state.products().length }})</span>
+          </p>
+          <div class="space-y-3">
+            <ng-container *ngFor="let cartItem of state.products()">
+              <div class="flex justify-between gap-3 text-dark text-lg">
+                <span>{{ cartItem.product.name }}</span>
+                <span>{{ cartItem.product.price * cartItem.quantity | currency }}</span>
+              </div>
+            </ng-container>
+
+            <dl class="flex justify-between gap-3 border-t pt-2 text-dark font-bold text-2xl">
+              <dt>Total</dt>
+              <dd>{{ (totalPrice) | currency }}</dd>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <a (click)="createPayment()"
+          class="block rounded-lg bg-green-600 py-2 text-center text-md font-bold text-white hover:bg-green-800 transition-colors">
+          Finalizar Compra
+        </a>
+
+        <!-- Botón para generar PDF -->
+        <button (click)="generarPDF()"
+          class="block rounded-lg bg-blue-600 py-2 text-center text-md font-bold text-white hover:bg-blue-800 transition-colors">
+          Generar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const mapFrame = document.getElementById('map');
+          const mapSrc = `https://www.google.com/maps/embed/v1/view?key=YOUR_API_KEY&center=${lat},${lng}&zoom=14`;
+          mapFrame.setAttribute('src', mapSrc);
+        },
+        (error) => {
+          console.error('Error obteniendo la ubicación: ', error);
+        }
+      );
+    } else {
+      console.error('Geolocalización no soportada por el navegador.');
+    }
+  });
+</script>
