@@ -17,4 +17,13 @@ export class ProductsService extends BaseHttpService {
   getProduct(id: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/catalog/products/${id}`);
   }
+
+  getProductsCategory(idCategory: string, page: number, limit: number): Observable<{ products: Product[]; total: number }> {
+    return this.http.get<{ products: any[]; total: number }>(`${this.apiUrl}/catalog/categories/${idCategory}/products`, {
+      params: {
+        limit: limit,
+        offset: (page - 1) * limit,
+      },
+    });
+  }
 }

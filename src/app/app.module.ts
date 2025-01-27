@@ -28,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { TablaComponent } from './operator/tabla/tabla.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [],  // Aquí va AppComponent y RegisterComponent
@@ -54,7 +55,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatSortModule,
         MatButtonModule
     ],  
-    providers: [provideHttpClient(withInterceptorsFromDi())],
+    providers: [provideHttpClient(withInterceptorsFromDi()), CookieService],
     bootstrap: []
     
 })

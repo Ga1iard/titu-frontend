@@ -27,9 +27,11 @@
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
     "ng-hcaptcha": "^2.4.0",
+    "ngx-cookie-service": "^19.0.0",
     "ngxtension": "^4.1.0",
     "pdfmake": "^0.2.8",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.15.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

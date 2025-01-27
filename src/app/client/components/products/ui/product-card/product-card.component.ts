@@ -48,4 +48,14 @@ export class ProductCardComponent {
       alert(`El producto ${product?.name} está agotado. No puede realizarse el pago.`);
     }
   }
+
+  getInteger(value: number) {
+    return Math.trunc(value);
+  }
+
+  getDecimal(value: number) {
+    const decimal = (value % 1).toFixed(2).split('.')[1];
+  // siempre dos dígitos
+    return decimal.padStart(2, '0');
+  }
 }

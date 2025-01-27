@@ -1,7 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Importa HttpClient para el backend
 import { LoginWelcomeComponent } from '../login-welcome/login-welcome.component';
 
@@ -13,6 +13,8 @@ import { LoginWelcomeComponent } from '../login-welcome/login-welcome.component'
   standalone: true,
 })
 export class LoginFormComponent {
+  router = inject(Router);
+
   //almacena datos y envia mensajes de exito o error en del formulario
   email: string = '';
   password: string = '';
@@ -68,13 +70,15 @@ export class LoginFormComponent {
      // Manejo de token recibido
      const token = response.token; // Asegúrate de que el backend envíe el token
      if (token) {
-       this.storeToken(token); // Almacena el token
+       //this.storeToken(token); // Almacena el token
        this.loginSuccess = true;
        this.userName = response.userName || '';
        this.role = response.role || ''; // Recibir el rol
        this.phoneNumber = response.phoneNumber || ''; // Recibir el número de teléfono
        this.email = response.email || ''; 
        this.showWelcome = true;
+
+       this.router.navigate(['/']);
      } else {
        this.error = 'token-missing';
        this.loginMessage = 'Error: No se recibió un token del servidor.';
