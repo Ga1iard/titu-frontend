@@ -63,12 +63,12 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.cookieService.delete('access_token', '/');  // Elimina la cookie de todo el dominio
-
-    // Redirige al usuario a la página de login o cualquier otra página
+    this.cookieService.delete('access_token', '/', 'tu-backend.render.com', true, 'None');
+  
+    // Redirige al usuario después de eliminar la cookie
     this.router.navigate(['/']).then(() => {
-      window.location.reload();  // Recarga la página completamente
-    });
+      window.location.reload(); // Recarga la página
+    });
   }
 
   primerLetaMayus(value: string) {
