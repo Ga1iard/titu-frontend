@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
 import { NgIf } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -63,7 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.cookieService.delete('access_token', '/', 'tu-backend.render.com', true, 'None');
+    this.cookieService.delete('access_token', '/', environment.ROOT_URL, true, 'None');
   
     // Redirige al usuario después de eliminar la cookie
     this.router.navigate(['/']).then(() => {
