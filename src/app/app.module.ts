@@ -53,7 +53,8 @@ import {CookieService} from 'ngx-cookie-service';
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatButtonModule
+        MatButtonModule,
+        
     ],  
     providers: [provideHttpClient(withInterceptorsFromDi()), CookieService],
     bootstrap: []

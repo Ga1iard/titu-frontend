@@ -27,7 +27,7 @@
             <dl class="flex justify-between gap-3 border-t pt-2 text-dark font-bold text-2xl">
               <dt>Total</dt>
               <!-- Se suma el precio original más el IVA -->
-              <dd>{{ (state.price() + (state.price() * 0.15)) | currency }}</dd>
+              <dd>{{ (state.price()) | currency }}</dd>
             </dl>
           </div>
           <a routerLink="/payment-process"

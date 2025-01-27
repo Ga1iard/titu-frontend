@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../conectionBF/api.service';
+import { Router } from '@angular/router'; // Importar Router
 
 @Component({
   selector: 'app-add-product',
@@ -19,6 +20,7 @@ export class AddProductComponent {
   descripcion: string = '';
   imagen: File | null = null; // Archivo de imagen 
   categories: any[] = []; // Aquí almacenaremos las categorías
+  showSuccessMessage: boolean = false;// Propiedad para mostrar mensaje de éxito
 
   // Propiedades para el mensaje de validación
   validationMessage: string = '';
@@ -27,7 +29,8 @@ export class AddProductComponent {
   // Vista previa del producto
   imagePreview: string | null = null; // Variable para la vista previa de la imagen
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
+
 
   ngOnInit(): void {
     // Llamar al servicio para obtener las categorías
@@ -68,12 +71,22 @@ export class AddProductComponent {
     this.apiService.addProduct(formData).subscribe(
       (response) => {
         console.log('Producto añadido con éxito:', response);
-        alert('Producto añadido con éxito.');
+        // Mostrar mensaje de éxito
+        this.showSuccessMessage = true;
+
+        // Ocultar el mensaje después de 3 segundos
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 3000);
         this.resetForm();
       },
       (error) => {
         console.error('Error al añadir el producto:', error);
-        alert('Hubo un error al añadir el producto.');
+        this.validationMessage = error.error.message || 'Hubo un error al añadir el producto.';
+      this.isValid = false;
+      setTimeout(() => {
+        this.validationMessage = '';
+      }, 3000);
       }
     );
   }
@@ -158,5 +171,11 @@ export class AddProductComponent {
     // Actualiza el modelo y el valor del campo
     this.stock = value;
     inputElement.value = value;
+  }
+
+  //cancelar y volver
+  // Método para "Cancelar y volver"
+  onCancelAndGoBack(): void {
+    this.router.navigate(['/operator/table-products']); // Redirige a la ruta especificada
   }
 }

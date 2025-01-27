@@ -36,7 +36,7 @@
   background-color: #ffffff;
 }
 
-
+/* Input del campo de dirección */
 .shipping-payment {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   box-shadow: 0 0 10px rgba(127, 14, 14, 0.1);
@@ -62,6 +62,7 @@
 .payment-method label {
   display: block;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .shipping-address label,
@@ -69,11 +70,19 @@
   margin-right: 82%;
 }
 
+.shipping-address input,
+.shipping-postal input,
+.payment-method input {
+  display: block;
+  margin-bottom: 10px;
+  max-width: 90%;
+}
+
 .shipping-address input {
   margin-top: 5px;
   margin-left: 0px;
   border-radius: 0.50rem;
-  width: 50%;
+  width: 1000%;
   padding: 2px;
   border: 2px solid #cbd5e0;
 }
@@ -158,9 +167,9 @@ h3 {
   display: flex;
   align-items: center;
   color: black;
-  margin-top: -2%;
+  /*margin-top: -5%;
   margin-left: 146px;
-  margin-right: 50%;
+  margin-right: 10%;*/
   border: 2px solid #ccc;
   border-radius: 10px;
 }
@@ -196,6 +205,8 @@ h3 {
   cursor: pointer;
   width: 100%;
   margin-top: 15px;
+  /*Negrita*/
+  font-weight: bold;
 }
 
 .btn-primary:hover {
@@ -224,7 +235,7 @@ h3 {
 /* Contenedor del campo de formulario */
 .form-group {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .password-container {
@@ -274,4 +285,19 @@ h3 {
   font-size: 15px;
 }
 
+button:disabled {
+  opacity: 0.3; /* Esto hace que el botón se vea más claro cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor a una mano bloqueada */
+}
+
+.map-container {
+  height: 200px;
+  width: 100%;
+  position: relative;
+}
+
+#map { 
+  height: 300px;
+  width: 650px;
+}
 

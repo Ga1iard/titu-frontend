@@ -3,27 +3,14 @@
   <p>Ingresa tus credenciales para continuar</p>
 
   <form (submit)="onSubmit()">
-    <input 
-      type="email" 
-      placeholder="Email" 
-      name="email" 
-      [(ngModel)]="email" 
-      required 
-      #emailInput="ngModel"
+    <input type="email" placeholder="Email" name="email" [(ngModel)]="email" required #emailInput="ngModel"
       [class.invalid]="emailInput.invalid && emailInput.touched">
-      
+
     <div class="password-container">
-      <input 
-        type="password" 
-        placeholder="Contraseña" 
-        name="password" 
-        [(ngModel)]="password" 
-        required 
-        #passwordInput="ngModel"
-        [class.invalid]="passwordInput.invalid && passwordInput.touched" 
-        id="password">
+      <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" required
+        #passwordInput="ngModel" [class.invalid]="passwordInput.invalid && passwordInput.touched" id="password">
       <span class="toggle-password" (click)="togglePasswordVisibility()">👁</span>
-      <a href="#" class="forgot-password">¿Has olvidado tu contraseña?</a>
+      <a href="/new-pass" class="forgot-password">¿Has olvidado tu contraseña?</a>
     </div>
 
     <button type="submit" class="btn-primary">Iniciar Sesión</button>
@@ -44,14 +31,18 @@
     </p>-->
   </form>
 
-  <div 
-    *ngIf="loginMessage" 
-    class="message" 
-    [class.success]="loginSuccess" 
-    [class.error]="!loginSuccess">
+  <div *ngIf="loginMessage" class="message" [class.success]="loginSuccess" [class.error]="!loginSuccess">
     {{ loginMessage }}
   </div>
 
-  <p>¿No tienes una cuenta? <a [routerLink]="['/register']">Registrarse</a></p>
+  <p>¿No tienes una cuenta?
+    <button (click)="openModalCustomer()" class="text-blue-500 hover:underline sidebar-content">Registrarse</button>
+  </p>
+  <!-- Modal -->
+  <div [ngClass]="{'modal modal-open': isModalCustomerOpen, 'modal': !isModalCustomerOpen}">
+    <div class="modal-content">
+      <app-register [isOpen]="isModalCustomerOpen" (close)="closeModalCustomer()"></app-register>
+    </div>
+  </div>
 </div>
 <app-login-welcome *ngIf="showWelcome" [userName]="userName" [role]="role" (close)="closeWelcome()"></app-login-welcome>

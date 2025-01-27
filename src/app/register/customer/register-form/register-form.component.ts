@@ -6,12 +6,14 @@ import { RegisterSuccessComponent } from '../register-success/register-success.c
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CaptchaModalComponent } from "../captcha-modal/captcha-modal.component";
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ApiService } from '../../../conectionBF/api.service'; // Importamos el servicio para registrar clientes
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RegisterSuccessComponent, CaptchaModalComponent],
+  imports: [CommonModule, FormsModule, RegisterSuccessComponent, CaptchaModalComponent, RouterModule],
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -38,6 +40,8 @@ export class RegisterFormComponent {
 
   // Bandera para controlar si el modal debe ser visible o no
   showSuccessModal: boolean = false;
+
+  backendError: string | null = null; 
 
   // Resetear el formulario y ocultar modales
   resetFormAndCloseModals() {
@@ -195,12 +199,14 @@ export class RegisterFormComponent {
         },
         error: (error) => {
           console.error('Error al registrar cliente:', error);
-          alert('Ocurrió un error al registrar el cliente.');
+          this.backendError = error?.error?.message || 'Ocurrió un error al registrar el cliente debido a datos duplicados. Por favor, intenta nuevamente más tarde.';
+          alert(this.backendError);
         }
       });
     } else {
       console.error('El CAPTCHA no fue verificado o el token no es válido.');
-      alert('Por favor, completa el CAPTCHA correctamente.');
+      this.backendError = 'Por favor, completa el CAPTCHA correctamente.';
+      alert(this.backendError);
     }
   }  
   

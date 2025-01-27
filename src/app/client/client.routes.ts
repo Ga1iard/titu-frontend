@@ -27,6 +27,7 @@ export default [
   { 
     path: 'payment-process', 
     component: ClientComponent,
-    loadChildren: () => import('../payment/payment-shell/payment.routes') 
+    loadChildren: () => import('../payment/payment-shell/payment.routes'),
+    canActivate: [authGuard]
   },
 ] as Routes;

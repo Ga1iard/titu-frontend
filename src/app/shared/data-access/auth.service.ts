@@ -35,4 +35,22 @@ export class AuthService extends BaseHttpService {
         })
       );
   }
+
+  
+
+  // Método para obtener los detalles completos del usuario
+  getUserData(): Observable<any> {
+    return this.http
+      .get(`${this.apiUrl}/auth/user/data`, { withCredentials: true })
+      .pipe(
+        map(response => {
+          console.log('Response User Data:', response);
+          return response;
+        }),
+        catchError(error => {
+          console.error('Error fetching user data.');
+          return [null]; // Devuelve null en caso de error
+        })
+      );
+  }
 }

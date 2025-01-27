@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../conectionBF/api.service'; // Importamos el servicio de conexión a la base de datos
 import { AgGridAngular } from 'ag-grid-angular';
+import { Router } from '@angular/router';
 import type {
   ColDef,
   GetDetailRowDataParams,
@@ -79,7 +80,8 @@ export class TableProductsComponent {
 
   private gridApi!: GridApi;
 
-  constructor(private productService: ApiService) { }
+  constructor(private productService: ApiService, public router: Router) {}
+
 
   ngOnInit(): void {
     this.loadProducts();
@@ -184,6 +186,13 @@ export class TableProductsComponent {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
+    this.gridApi = params.api;
+
+    // Pasar el router al contexto
+    (params.api as any).context = {
+      ...(params.api as any).context,
+      router: this.router, // Esto asegura que el Router esté disponible en el contexto
+    };
   }
 
   statusEntries = Object.entries(statuses);

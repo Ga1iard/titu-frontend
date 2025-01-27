@@ -59,7 +59,7 @@
   </form>
 
   <p class="login-link">
-    ¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a>
+    ¿Ya tienes una cuenta? <a [routerLink]="['/login']">Iniciar sesión</a>
   </p>
   <!-- Modal de éxito del registro -->
   <app-register-success *ngIf="showSuccessModal" (close)="closeSuccessModal()"></app-register-success>

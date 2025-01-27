@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Importa HttpClient para el backend
 import { LoginWelcomeComponent } from '../login-welcome/login-welcome.component';
+import { RegisterComponent } from '../../register/customer/register/register.component';
+import { environment } from '../../../../src/environments/environment';
 
 @Component({
   selector: 'app-login-form',
-  imports: [FormsModule, CommonModule, RouterModule, LoginWelcomeComponent],
+  imports: [FormsModule, CommonModule, RouterModule, LoginWelcomeComponent, RegisterComponent],
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
   standalone: true,
@@ -26,6 +28,22 @@ export class LoginFormComponent {
   showWelcome: boolean = false;
   role: string = '';
   phoneNumber: string = ''; 
+
+  // Variables para controlar la visibilidad de los modales
+  isModalCustomerOpen: boolean = false;
+  isModalSesionOpen: boolean = false;
+
+  // Funciones para abrir los modales
+  openModalCustomer() {
+    this.isModalCustomerOpen = true;
+    document.body.classList.add('modal-open');  // Añadir la clase modal-open al body
+  }
+
+  // Funciones para cerrar los modales
+  closeModalCustomer() {
+    this.isModalCustomerOpen = false;
+    document.body.classList.remove('modal-open');  // Quitar la clase modal-open del body
+  }
 
   //constructor para inyeccion de dependencias y hacer peticiones http
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {} // Inyección de HttpClient
@@ -61,7 +79,7 @@ export class LoginFormComponent {
     }
  // Lógica de autenticación, petición al backend
  this.http
- .post('http://localhost:3000/api/login', {
+ .post(`${environment.API_URL}/login`, {
    email: this.email,
    password: this.password,
  }, { withCredentials: true })

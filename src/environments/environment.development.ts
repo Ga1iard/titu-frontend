@@ -1,4 +1,4 @@
 export const environment = {
-  API_URL: 'https://titumarket.netlify.app/api',
-  ROOT_URL: 'https://titumarket.netlify.app',
+  API_URL: 'http://localhost:3000/api',
+  ROOT_URL: 'http://localhost:3000',
 };

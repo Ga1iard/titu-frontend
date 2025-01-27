@@ -25,7 +25,7 @@ export class ValidationService {
 
   // Validar dirección
   validarDireccion(direccion: string): boolean {
-    const regex = /^[a-zA-Z0-9\s,.-]+$/;
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúÑñ0-9\s,.'-]+$/;
     return regex.test(direccion);
   }
 

@@ -13,7 +13,7 @@
   <div class="navbar">
     <div class="container mx-auto max-w-screen-xl p-2 flex items-center justify-between space-x-4">
       <div class="navbar-logo">
-        <a class="flex items-center space-x-2">
+        <a href="/" class="flex items-center space-x-2">
           <img width="100px" src="/img/logo5.svg" alt="Logo" />
         </a>
       </div>
@@ -50,13 +50,28 @@
 
 
       <!-- Tabla de productos -->
-      <div [class]="themeClass" class="grid">
-        <ag-grid-angular [gridOptions]="gridOptions" style="height: 100%" (gridReady)="onGridReady($event)" [theme]="theme"
-          [columnDefs]="columnDefs" [rowData]="productos" [defaultColDef]="defaultColDef" [rowHeight]="rowHeight"
-          [autoSizeStrategy]="autoSizeStrategy" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
-          [paginationPageSizeSelector]="paginationPageSizeSelector" [masterDetail]="masterDetail"
-          [quickFilterText]="quickFilterText" [detailRowAutoHeight]="detailRowAutoHeight"></ag-grid-angular>
-      </div>
+<!-- Tabla de productos -->
+<div [class]="themeClass" class="grid">
+  <ag-grid-angular 
+    [gridOptions]="gridOptions" 
+    style="height: 100%" 
+    (gridReady)="onGridReady($event)" 
+    [theme]="theme"
+    [columnDefs]="columnDefs" 
+    [rowData]="productos" 
+    [defaultColDef]="defaultColDef" 
+    [rowHeight]="rowHeight"
+    [autoSizeStrategy]="autoSizeStrategy" 
+    [pagination]="pagination" 
+    [paginationPageSize]="paginationPageSize"
+    [paginationPageSizeSelector]="paginationPageSizeSelector" 
+    [masterDetail]="masterDetail"
+    [quickFilterText]="quickFilterText" 
+    [detailRowAutoHeight]="detailRowAutoHeight"
+    [context]="{ router: router }"> <!-- Pasa el router aquí -->
+  </ag-grid-angular>
+</div>
+
     </div>
   </div>
 </body>

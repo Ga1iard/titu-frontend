@@ -120,19 +120,19 @@ export async function generarFactura(factura: any): Promise<void> {
   doc.setFont('helvetica', 'bold');
   doc.text('Cliente:', 16, 70);
   doc.setFont('helvetica', 'normal');
-  doc.text('Maria:', 48, 70);
+  doc.text(factura.cliente, 48, 70);
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');
   doc.text('Email:', 16, 75);
   doc.setFont('helvetica', 'normal');
-  doc.text('maria@gmail.com', 48, 75);
+  doc.text(factura.email, 48, 75);
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');
   doc.text('Teléfono:', 16, 80);
   doc.setFont('helvetica', 'normal')
-  doc.text('911-234-5678', 48, 80);
+  doc.text(factura.telefono, 48, 80);
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');

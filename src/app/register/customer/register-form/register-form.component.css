@@ -9,7 +9,7 @@
   width: 100%;
   margin-top: 15px;
 }
-
+ 
 .btn-primary:hover {
   background-color: #2874a6;
 }
@@ -18,6 +18,7 @@
 .register-section {
   background-color: #e0e0e0;
   padding: 25px;
+  margin-right: 100px;
   width: 100%;
   height: 105%;
 }
@@ -40,7 +41,24 @@
   margin-bottom: 6px;
   color: #000102;
   font-size: 16px;
+  display: flex;         /* Flexbox para un layout más controlado */
+  flex-direction: column; /* Los elementos se apilan de arriba hacia abajo */
+  align-items: flex-start; /* Alinea los elementos al inicio (izquierda) */
 }
+
+.password-input {
+  align-self: stretch;
+}
+
+label {
+  font-size: 16px;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  display: inline-block; /* Permite que el label se ajuste al contenido, pero se alinee a la izquierda */
+  text-align: left;      /* Alinea el texto del label a la izquierda */
+  margin-bottom: 5px;    /* Espacio entre el label y el input */
+}
+
 
 .form-group input {
   color: #000102;
@@ -57,6 +75,7 @@
   position: relative;
   align-items: center; /* Alinea el contenedor con el texto */
   padding: 1px 5px;
+  border-color: #3498db;
 }
 
 .toggle-password {
@@ -89,7 +108,8 @@
   width: calc(103% - 25px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  align-items: center;
+  align-items:flex-start ;
+  text-align: left;
   z-index: 1;
 }
 

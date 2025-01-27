@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';  // Importa el Router
 import { CartStateService } from '../../shared/data-access/cart-state.service';
 import { ProductItemCart } from '../../shared/interfaces/product.interface';
+import { CommonModule } from '@angular/common';
+import { environment } from '../../../../src/environments/environment';
+import { NotificationService } from '../../notificationService/notification.service';
 
 @Component({
   selector: 'app-pago-exitoso',
+  imports: [CommonModule],
   templateUrl: './pago-exitoso.component.html',
   styleUrls: ['./pago-exitoso.component.css']
 })
@@ -16,7 +20,8 @@ export class PagoExitosoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cartStateService: CartStateService,
-    private router: Router  // Inyecta el Router para la redirección
+    private router: Router,  // Inyecta el Router para la redirección
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +41,7 @@ export class PagoExitosoComponent implements OnInit {
 
   async capturePayment(orderID: string): Promise<void> {
     try {
-      const response = await fetch('http://localhost:3000/api/payments/capture-payment', {
+      const response = await fetch(`${environment.API_URL}/payments/capture-payment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +55,7 @@ export class PagoExitosoComponent implements OnInit {
       // Lógica para actualizar el estado del pago
       if (data.status === 'COMPLETED') {
         this.status = '¡Pago Completado!';
-        this.details = `Su transacción se completó con éxito. \nA su correo le llegarán los detalles de la compra.`;
+        this.details = `Su transacción se completó con éxito. \n`;
 
         // Ahora actualizamos el stock de los productos en la base de datos
         await this.updateStockAfterPurchase();
@@ -69,17 +74,19 @@ export class PagoExitosoComponent implements OnInit {
           // Después de 1 segundo de redirigir, recargar la página principal
           setTimeout(() => {
             window.location.reload();  // Recarga la página principal
-          }, 0.01);  // 1 segundo de espera antes de recargar
+          }, 0.001);  // 1 segundo de espera antes de recargar
         }, 5000);  // 5000 ms = 5 segundos de espera antes de redirigir
 
       } else {
         this.status = 'Pago no completado';
         this.details = `Estado del pago: ${data.status}`;
+        this.goToHome();
       }
     } catch (error) {
       console.error('Error al capturar el pago:', error);
       this.status = 'Error en la transacción';
       this.details = 'No pudimos procesar su pago. Inténtelo nuevamente.';
+      this.goToHome();
     }
   }
 
@@ -95,7 +102,7 @@ export class PagoExitosoComponent implements OnInit {
       }));
 
       // Enviar la solicitud para actualizar el stock
-      const response = await fetch('http://localhost:3000/api/catalog/products/update-stock', {
+      const response = await fetch(`${environment.API_URL}/catalog/products/update-stock`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,6 +131,11 @@ export class PagoExitosoComponent implements OnInit {
     console.log('Productos guardados en el localStorage:', localStorage.getItem('products'));
     console.log('Carrito vaciado exitosamente');
     
+  }
+
+  // Función para volver al inicio
+  goToHome(): void {
+    this.router.navigate(['/']); // Redirige a la página de inicio
   }
   
 }

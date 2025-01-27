@@ -5,15 +5,16 @@
 <div class="modal">
 <div class="modal-content">
     <!-- Botón para cerrar el modal -->
+     <span (click)="closeModal()" class="close">&times;</span>
 
     <div class="modal-container flex">
         <!-- Sección azul (bienvenida) -->
         <div class="welcome-section">
             <h1>¡Nos alegra verte de nuevo!</h1>
-            <img src="http://localhost:4200/assets/images/ImagenInicio.png" alt="Titu">
+            <img src="/assets/images/ImagenInicio.png" alt="Titu">
         </div>
 
-        <!-- Sección de registro -->
+        <!-- Sección de login-->
         <div class="login-section">
            <!-- Usando el componente login-form -->
                <app-login-form></app-login-form>

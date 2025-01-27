@@ -71,13 +71,26 @@
     </label>
   </div>
 
-  <div class="cancelar">
-    <button type="button" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 
-      focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 
-      dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
-      Cancelar y volver
-    </button>
+   <!-- Mensaje de éxito -->
+   <div *ngIf="showSuccessMessage" class="success-message">
+    Producto añadido exitosamente.
   </div>
+
+
+
+
+<!-- Botón Cancelar y volver -->
+<div class="cancelar">
+  <button 
+    type="button" 
+    class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 
+      focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 
+      dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+    (click)="onCancelAndGoBack()"> <!-- Llamar al método de redirección -->
+    Cancelar y volver
+  </button>
+</div>
+
 
   <div class="boton">
     <button (click)="onSubmit()" type="button" 
