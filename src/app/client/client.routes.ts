@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ClientComponent } from './client.component';
+import { authGuard } from '../shared/guards/auth.guard';
 
 export default [
   {
@@ -10,7 +11,8 @@ export default [
   { 
     path: 'cart', 
     component: ClientComponent,
-    loadChildren: () => import('./components/cart/cart.routes') 
+    loadChildren: () => import('./components/cart/cart.routes'),
+    canActivate: [authGuard]
   },
   { 
     path: 'products', 

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component'; // Si no es standalone, debe declararse aquí
 import { routes } from './app.routes';
@@ -20,10 +21,19 @@ import { SidebarComponent } from './register/homePage/sidebar/sidebar.component'
 import '@hcaptcha/vanilla-hcaptcha';
 import { RegisterModule } from './register/register.module';
 
+// Importa los módulos de Angular Material
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { TablaComponent } from './operator/tabla/tabla.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
     declarations: [],  // Aquí va AppComponent y RegisterComponent
     imports: [
-        BrowserModule, 
+        BrowserModule,
+        CommonModule, 
         FormsModule, 
         RegisterModule,
         RegisterComponentOperator,
@@ -37,7 +47,12 @@ import { RegisterModule } from './register/register.module';
         RegisterFormComponent,
         //CaptchaModalComponent,
         ChangePasswordComponent,
-        SidebarComponent
+        SidebarComponent,
+        TablaComponent,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatButtonModule
     ],  
     providers: [provideHttpClient(withInterceptorsFromDi())],
     bootstrap: []

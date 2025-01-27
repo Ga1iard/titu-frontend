@@ -62,7 +62,7 @@ export class LoginFormComponent {
  .post('http://localhost:3000/api/login', {
    email: this.email,
    password: this.password,
- })
+ }, { withCredentials: true })
  .subscribe(
    (response: any) => {
      // Manejo de token recibido

@@ -8,6 +8,7 @@ import { Header1Component } from "./register/homePage/header1/header1.component"
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TablaComponent } from "./operator/tabla/tabla.component";
+import { TableProductsComponent } from './operator/table-products/table-products.component';
 
 @Component({
   selector: 'app-root',

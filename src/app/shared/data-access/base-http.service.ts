@@ -8,4 +8,5 @@ import { environment } from '../../../environments/environment';
 export class BaseHttpService {
   http = inject(HttpClient);
   apiUrl = environment.API_URL;
+  rootUrl = environment.ROOT_URL;
 }

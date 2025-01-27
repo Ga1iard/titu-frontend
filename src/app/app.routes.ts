@@ -10,6 +10,10 @@ import { ChangePasswordComponent } from './register/change-password/change-passw
 import { PagoExitosoComponent } from './payment/pago-exitoso/pago-exitoso.component';
 //import { PagoCanceladoComponent } from './payment/pago-cancelado/pago-cancelado.component';
 import { AddProductComponent } from './operator/add-product/add-product.component';
+import { PoliticasPrivacidadComponent } from './shared/ui/footer/politicas-privacidad/politicas-privacidad.component';
+import { TerminosCondicionesComponent } from './shared/ui/footer/terminos-condiciones/terminos-condiciones.component';
+import { TableProductsComponent } from './operator/table-products/table-products.component';
+import { roleGuard } from './shared/guards/role.guard';
 export const routes: Routes = [
     {
       path: '',
@@ -18,13 +22,17 @@ export const routes: Routes = [
     { path: 'register-customer', component: RegisterComponent},
     { path: 'register-operator', component: RegisterComponentOperator},
     { path: 'register-admin', component: RegisterComponentAdmin},
-    { path: 'header1', component: Header1Component},
+    { path: 'admin', component: Header1Component, canActivate: [roleGuard], data: { expectedRoles: ['administrador', 'operador'] }},
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'login', component: LoginComponent },            // Ruta para el login
     { path: 'twofactor', component: TwoFactorAuthComponent },// Ruta para twofactor
     { path: 'login-welcome', component: LoginWelcomeComponent }, // Ruta de bienvenida después del login
     {path: 'operator/add-product', component: AddProductComponent},
     {path: 'payment-success', component: PagoExitosoComponent}, // Ruta para el pago exitoso
+    {path: 'politicas-privacidad', component: PoliticasPrivacidadComponent},
+    {path: 'terminos-condiciones', component: TerminosCondicionesComponent},
+    //{path: 'payment-cancel', component: PagoCanceladoComponent}, // Ruta para el pago cancelado
+    {path: 'operator/table-products', component: TableProductsComponent},
     {
       path: '**',
       redirectTo: '',

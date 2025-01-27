@@ -43,4 +43,9 @@ export class ApiService {
   registerPayment(paymentData: any): Observable<any> {
     return this.http.post(this.paypalApiUrl, paymentData);
   }
+
+  // Método para obtener los productos
+  getProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/catalog/inventory/table`); // Asegúrate de que el endpoint coincide
+  }
 }
