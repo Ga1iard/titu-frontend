@@ -5,7 +5,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
 import { NgIf } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -64,12 +63,12 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.cookieService.delete('access_token', '/', environment.ROOT_URL, true, 'None');
-  
-    // Redirige al usuario después de eliminar la cookie
+    this.cookieService.delete('access_token', '/');  // Elimina la cookie de todo el dominio
+
+    // Redirige al usuario a la página de login o cualquier otra página
     this.router.navigate(['/']).then(() => {
-      window.location.reload(); // Recarga la página
-    });
+      window.location.reload();  // Recarga la página completamente
+    });
   }
 
   primerLetaMayus(value: string) {

@@ -142,14 +142,6 @@ export async function generarFactura(factura: any): Promise<void> {
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');
-  doc.text('Código Postal:', 16, 90);
-  doc.setFont('helvetica', 'normal');
-  doc.text(factura.codigoPostal, 48, 90);
-
-  
-
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'bold');
   doc.text('Forma de Pago:', 130, 70);
   doc.setFont('helvetica', 'normal');
   doc.text('PayPal', 170, 70);
@@ -251,7 +243,7 @@ export async function generarFactura(factura: any): Promise<void> {
     dibujarPieDePagina(doc);
     y = 60;
   }
-  const terms = '0987384809\ntitucorporation3@gmail.com\nFacebook: https://www.facebook.com/OnlineTitu/\nInstagram: https://www.instagram.com/titu.online/\nWhatsapp: https://chat.whatsapp.com/H9bCXEsF0Jf3icFxl2RmCm\nSitio web: ';
+  const terms = '0987384809\ntitucorporation3@gmail.com\nFacebook: https://www.facebook.com/OnlineTitu/\nInstagram: https://www.instagram.com/titu.online/\nWhatsapp: https://chat.whatsapp.com/H9bCXEsF0Jf3icFxl2RmCm\nSitio web: https://titumarket.netlify.app/ ';
   doc.text('Contacto', 14, maxYC);
   doc.setFontSize(10);
   doc.text(terms, 14, maxY, { maxWidth: 180 });
